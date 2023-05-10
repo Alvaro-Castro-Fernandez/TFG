@@ -1,0 +1,11 @@
+.example-card{
+    max-width: 400px;
+}
+.products{
+    display:flex;
+    row-gap: 20px;
+    column-gap: 20px;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    
+}
