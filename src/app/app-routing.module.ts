@@ -6,6 +6,15 @@ import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { ShoppingListComponent } from './pages/shopping-list/shopping-list.component';
 
 const routes: Routes = [
+  {
+    path: 'login',
+    loadChildren: () => import('./pages/login-page/login-page.module').then(m => m.LoginPageModule)
+  },
+  {
+    path: 'main',
+    loadChildren: () => import('./pages/main/main.module').then(m => m.MainModule)
+  },
+
   { path: '', component: MainComponent },
   { path: 'onSales', component: OnSalesPageComponent },
   { path: 'login', component: LoginPageComponent },
