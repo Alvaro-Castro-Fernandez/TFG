@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { AccountInterface } from '../../interfaces/account.interface'
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login-form',
@@ -12,9 +13,15 @@ export class LoginPageComponent implements OnInit {
   email: string = '';
   password: string = '';
 
-  constructor() { }
+  constructor(
+    private route: Router
+  ) { }
 
   ngOnInit(): void {
+  }
+
+  createNewAccount(){
+    this.route.navigate(['/login/newAccount'])
   }
 
   onSubmit(loginForm: NgForm) {

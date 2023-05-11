@@ -4,7 +4,7 @@
 }
 
 .full-width {
-  width: 100%;
+  width: 50%;
 }
 
 td {
@@ -13,10 +13,8 @@ td {
 
 .card {
   margin-top: 10px;
-  max-height: 450px;
-  /* altura máxima de la carta */
+  max-height: 400px;
   overflow-y: scroll;
-  /* agregar barra de desplazamiento vertical */
 }
 
 span {
