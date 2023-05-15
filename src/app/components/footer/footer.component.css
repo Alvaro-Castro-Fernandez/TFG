@@ -1,6 +1,11 @@
 footer {
   background-color: #000000;
-  padding: 4em;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  padding: 20px 0;
+  text-align: center;
 }
 
 h4 {

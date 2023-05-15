@@ -1,0 +1,65 @@
+<div class="container">
+  <div class="row m-4">
+    <div class="col-12">
+      <form>
+        <mat-form-field class="example-chip-list" appearance="fill">
+          <mat-label>Seleccione categorias que buscar</mat-label>
+          <mat-chip-grid #chipGrid>
+            <mat-chip-row *ngFor="let arr of categories" (removed)="remove(arr)">
+              {{arr}}
+              <button matChipRemove [attr.aria-label]="'remove ' + arr">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </mat-chip-row>
+          </mat-chip-grid>
+          <input placeholder="Seleciona" #arrInput formControl="categotyControl" [matChipInputFor]="chipGrid"
+            [matAutocomplete]="auto" [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+            (matChipInputTokenEnd)="add($event)" />
+          <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+            <mat-option *ngFor="let arr of filteredCategories | async" [value]="arr">
+              {{arr}}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+      </form>
+    </div>
+  </div>
+
+  <div class="row -4">
+    <div class="col-12">
+      <div class="products">
+        <mat-card >
+          <mat-card-header>
+            <mat-card-title-group>
+              <mat-card-title>AAA</mat-card-title>
+              <mat-card-subtitle>AAAA</mat-card-subtitle>
+            </mat-card-title-group>
+          </mat-card-header>
+          <img mat-card-lg-image src="#" alt="Imagen del producto">
+          <mat-card-content>
+            <mat-card-actions>
+              <button mat-raised-button color="primary">Ver</button>
+              <button mat-raised-button color="warn">Añadir al carrito</button>
+            </mat-card-actions>
+          </mat-card-content>
+        </mat-card>
+        <mat-card >
+          <mat-card-header>
+            <mat-card-title-group>
+              <mat-card-title>AAA</mat-card-title>
+              <mat-card-subtitle>AAAA</mat-card-subtitle>
+            </mat-card-title-group>
+          </mat-card-header>
+          <img mat-card-lg-image src="#" alt="Imagen del producto">
+          <mat-card-content>
+            <mat-card-actions>
+              <button mat-raised-button color="primary">Ver</button>
+              <button mat-raised-button color="warn">Añadir al carrito</button>
+            </mat-card-actions>
+          </mat-card-content>
+        </mat-card>
+
+      </div>
+    </div>
+  </div>
+</div>

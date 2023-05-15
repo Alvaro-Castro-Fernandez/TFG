@@ -1,140 +1,26 @@
 <div class="container">
     <div class="row">
-        <div class="col-8">
+        <div class="col-8   ">
             <form>
                 <h3 class="my-4">Login Form</h3>
-                <mat-form-field class="full-width">
+                <mat-form-field class="full-size">
                     <mat-label>Correo Electronico</mat-label>
-                    <input matInput placeholder="ejemplo123@email.com">
+                    <input type="email" matInput formControl="email" [errorStateMatcher]="matcher"
+                        placeholder="ejemplo123@email.com">
+                    <mat-error>A new Error has
+                        ocurred</mat-error>
                 </mat-form-field>
-
-                <mat-form-field class="full-width">
+                <br>
+                <mat-form-field class="full-size">
                     <mat-label>Contraseña de la cuenta</mat-label>
-                    <input type="password" matInput #passwordLength minlength="8">
-                    <mat-hint align="end">{{passwordLength.value.length}} / 8</mat-hint>
+                    <input type="password" matInput>
                 </mat-form-field>
-
-                <table class="full-width" cellspacing="0">
-                    <tr>
-                        <td>
-                            <mat-form-field class="full-width">
-                                <mat-label>Nombre</mat-label>
-                                <input matInput>
-                            </mat-form-field>
-                        </td>
-                        <td>
-                            <mat-form-field class="full-width">
-                                <mat-label>Apellidos</mat-label>
-                                <input matInput placeholder="Minimo el primer apellido">
-                            </mat-form-field>
-                        </td>
-                    </tr>
-                </table>
-                <table class="full-width" cellspacing="0">
-                    <tr>
-                        <td>
-                            <mat-form-field class="full-width">
-                                <mat-label>Ciudad</mat-label>
-                                <input matInput placeholder="Ex. Madrid // Podria añadir el service">
-                            </mat-form-field>
-                        </td>
-                        <td>
-                            <mat-form-field class="full-width">
-                                <mat-label>Provincia</mat-label>
-                                <input matInput placeholder="// Podria añadir el service">
-                            </mat-form-field>
-                        </td>
-                        <td>
-                            <mat-form-field class="full-width">
-                                <mat-label>Codigo postal</mat-label>
-                                <input matInput #postalCode maxlength="5">
-                                <mat-hint align="end">{{postalCode.value.length}} / 5</mat-hint>
-                            </mat-form-field>
-                        </td>
-                    </tr>
-                </table>
-                <p>
-                    <mat-form-field class="full-width">
-                        <mat-label>Direccion de domicilio</mat-label>
-                        <input matInput placeholder="Ejemplo: Calle Amapola 35, 3 IZQ">
-                    </mat-form-field>
-                </p>
                 <div class="buttons">
-                    <button mat-raised-button color="primary">Crear Cuenta</button>
-                    <button mat-button color="primary">Usar cuenta exixtente</button>
+                    <button mat-raised-button color="primary">Iniciar Sesion</button>
+                    <button mat-button color="primary" routerLink="/login/newAccount" (click)="unsubmit($event)">Crear
+                        una cuenta</button>
                 </div>
             </form>
         </div>
-        <div class="col-4 py-4">
-            <mat-card class="card">
-                <mat-card-header>
-                    <mat-card-title-group>
-                        <mat-card-title>Terminos de Condiciones de Uso</mat-card-title>
-                    </mat-card-title-group>
-                </mat-card-header>
-                <mat-card-content>
-                    <mat-divider></mat-divider>
-                    <span>1. Uso de la Página Web</span>
-                    <p>Nuestra página web es solo para fines de prueba y experimentación, y no se debe utilizar con
-                        fines comerciales. No debes utilizar nuestra página web para cualquier actividad ilegal o no
-                        autorizada. Nos reservamos el derecho de suspender o cancelar tu uso de nuestra página web si
-                        consideramos que has violado estos términos y condiciones.</p>
-
-                    <span>2. Propiedad Intelectual</span>
-                    <p>Todo el contenido que se encuentra en nuestra página web, incluyendo pero no limitado a
-                        imágenes, texto, gráficos, logotipos y código fuente, son propiedad exclusiva nuestra. No se
-                        permite la reproducción, distribución, modificación, exhibición pública, venta o cualquier otra
-                        forma de explotación sin nuestra autorización previa por escrito.</p>
-
-                    <span>3. Responsabilidad</span>
-                    <p>No nos hacemos responsables por cualquier daño directo, indirecto, incidental, consecuente o
-                        punitivo que surja del uso o la incapacidad de utilizar nuestra página web. Nos reservamos el
-                        derecho de modificar o discontinuar nuestra página web en cualquier momento sin previo aviso.
-                    </p>
-
-                    <span>4. Enlaces a otras Páginas Web</span>
-                    <p>Nuestra página web puede contener enlaces a otros sitios web de terceros. No somos responsables
-                        del contenido o la exactitud de cualquier información que se encuentre en estos sitios web de
-                        terceros.</p>
-
-                    <span>5. Modificaciones de los Términos y Condiciones</span>
-                    <p>Nos reservamos el derecho de modificar estos términos y condiciones en cualquier momento sin
-                        previo aviso. Es tu responsabilidad revisar periódicamente estos términos y condiciones para
-                        estar al tanto de cualquier cambio. Si continúas utilizando nuestra página web después de
-                        cualquier modificación de estos términos y condiciones, se considerará que has aceptado los
-                        cambios.</p>
-                </mat-card-content>
-                <mat-divider></mat-divider>
-                <mat-card-actions>
-                    <div class="m-2">
-                        <input type="checkbox" mat-button><label>He leido y acepto las condiciones de uso</label>
-                    </div>
-                </mat-card-actions>
-            </mat-card>
-
-        </div>
     </div>
-
 </div>
-
-<!-- <form (ngSubmit)="onSubmit(loginForm)" #loginForm="ngForm">
-    <label>
-        Email:
-        <input type="email" name="email" required email (ngModel)="email">
-        <div *ngIf="loginForm.controls.email.touched && loginForm.controls.email.errors">
-            <div *ngIf="loginForm.controls.email.errors.required">Email is required</div>
-            <div *ngIf="loginForm.controls.email.errors.email">Please enter a valid email</div>
-        </div>
-    </label>
-    <br>
-    <label>
-        Password:
-        <input type="password" name="password" required minLength="8" (ngModel)="password">
-        <div *ngIf="loginForm.controls.password.touched && loginForm.controls.password.errors">
-            <div *ngIf="loginForm.controls.password.errors.required">Password is required</div>
-            <div *ngIf="loginForm.controls.password.errors.minlength">Password must be at least 8 characters long</div>
-        </div>
-    </label>
-    <br>
-    <button type="submit">Login</button>
-</form> -->
