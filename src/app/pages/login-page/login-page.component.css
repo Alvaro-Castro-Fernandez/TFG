@@ -1,3 +1,24 @@
+<<<<<<< HEAD
+=======
+.example-form {
+  min-width: 150px;
+  max-width: 500px;
+}
+
+.full-width {
+  width: 50%;
+}
+
+td {
+  padding-right: 8px;
+}
+
+.card {
+  margin-top: 10px;
+  max-height: 400px;
+  overflow-y: scroll;
+}
+>>>>>>> 0523ac815a28041fc54a8f9715e409e4f91697f3
 
 span {
   font-weight: bolder;
