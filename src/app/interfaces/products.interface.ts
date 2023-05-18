@@ -1,4 +1,5 @@
-export interface ProductInterface{
+export interface ProductInterface
+{
     name:string,
     categories:string[],
     price: number,

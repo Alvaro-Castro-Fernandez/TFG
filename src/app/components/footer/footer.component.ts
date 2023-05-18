@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { DocumentService } from 'src/app/services/document.service';
 
 @Component({
   selector: 'app-footer',
@@ -6,5 +7,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./footer.component.css']
 })
 export class FooterComponent {
+
+  constructor(private ds: DocumentService) { }
 
 }

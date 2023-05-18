@@ -7,7 +7,6 @@ import { Component } from '@angular/core';
 })
 export class LoginNewAccountPageComponent {
 
-<<<<<<< HEAD
   constructor(){
 
   }
@@ -20,6 +19,4 @@ export class LoginNewAccountPageComponent {
     //Un boton con los datos del usuario
   }
 
-=======
->>>>>>> 0523ac815a28041fc54a8f9715e409e4f91697f3
 }

@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { AccountInterface } from '../../interfaces/account.interface'
 import { Router } from '@angular/router';
-<<<<<<< HEAD
 import { ErrorStateMatcher } from '@angular/material/core';
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -11,8 +10,7 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
     return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
   }
 }
-=======
->>>>>>> 0523ac815a28041fc54a8f9715e409e4f91697f3
+
 
 @Component({
   selector: 'app-login-form',
@@ -21,16 +19,11 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 })
 
 export class LoginPageComponent implements OnInit {
-<<<<<<< HEAD
   emailFormControl = new FormControl('', [Validators.required, Validators.email]);
   matcher = new MyErrorStateMatcher();
   
-=======
-
   email: string = '';
   password: string = '';
-
->>>>>>> 0523ac815a28041fc54a8f9715e409e4f91697f3
   constructor(
     private route: Router
   ) { }

@@ -10,7 +10,6 @@ import {
 import { firstValueFrom, Observable, throwError } from "rxjs";
 import { map, tap } from "rxjs/operators";
 import { DocumentData } from "rxfire/firestore/interfaces";
-import { MatSnackBar } from "@angular/material/snack-bar";
 import { AppService } from "./app.service";
 
 export interface BaseDocument {
@@ -31,7 +30,6 @@ export class DocumentService {
   constructor(
     private app: AppService,
     private db: Firestore,
-    private snackBar: MatSnackBar,
   ) {
   }
 
@@ -235,7 +233,7 @@ export class DocumentService {
 
   private error(message = 'Error al guardar el documento') {
     this.app.loaded()
-    this.snackBar.open(message, 'cerrar');
+    console.log(message, 'cerrar');
   }
 
   /**

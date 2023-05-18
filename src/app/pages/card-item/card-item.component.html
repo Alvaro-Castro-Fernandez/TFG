@@ -1,6 +1,5 @@
 <div class="container">
   <div class="row m-4">
-<<<<<<< HEAD
     <div class="col-12">
       <form>
         <mat-form-field class="example-chip-list" appearance="fill">
@@ -19,72 +18,16 @@
           <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
             <mat-option *ngFor="let arr of filteredCategories | async" [value]="arr">
               {{arr}}
-=======
-    <div class="col">
-      <form>
-        <mat-form-field class="example-chip-list" appearance="fill">
-          <mat-label>Buscar categorias</mat-label>
-          <mat-chip-grid #chipGrid >
-            <mat-chip-row *ngFor="let value of mainCategory" (removed)="remove(value)">
-              {{value}}
-              <button matChipRemove [attr.aria-label]="'remove ' + value">
-                <mat-icon>delete_forever</mat-icon>
-              </button>
-            </mat-chip-row>
-          </mat-chip-grid>
-          <input placeholder="categorias" #fruitInput formControl="categoryControl" [matChipInputFor]="chipGrid"
-            [matAutocomplete]="auto" [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-            (matChipInputTokenEnd)="add($event)" />
-          <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
-            <mat-option *ngFor="let value of filteredCategories | async" [value]="value">
-              {{value}}
->>>>>>> 0523ac815a28041fc54a8f9715e409e4f91697f3
             </mat-option>
           </mat-autocomplete>
         </mat-form-field>
       </form>
-<<<<<<< HEAD
     </div>
   </div>
 
   <div class="row -4">
     <div class="col-12">
-      <div class="products">
-        <mat-card >
-          <mat-card-header>
-            <mat-card-title-group>
-              <mat-card-title>AAA</mat-card-title>
-              <mat-card-subtitle>AAAA</mat-card-subtitle>
-            </mat-card-title-group>
-          </mat-card-header>
-          <img mat-card-lg-image src="#" alt="Imagen del producto">
-=======
-
-
-    </div>
-  </div>
-  <div class="row">
-    <div class="col">
-      <!-- <div *ngFor="let x of array"> -->
-      <!-- Ya esta puesyto con flex -->
-      <div class="products" *ngFor="let card of cards.slice(10 *10, (10 + 1) *10)">
-        <mat-card class="example-card">
-          <mat-card-header>
-            <mat-card-title-group>
-              <mat-card-title>{{card.name}}</mat-card-title>
-              <mat-card-subtitle>{{card.price}}</mat-card-subtitle>
-            </mat-card-title-group>
-          </mat-card-header>
-          <img mat-card-xl-image src="#" alt="Imagen del producto">
->>>>>>> 0523ac815a28041fc54a8f9715e409e4f91697f3
-          <mat-card-content>
-            <mat-card-actions>
-              <button mat-raised-button color="primary">Ver</button>
-              <button mat-raised-button color="warn">Añadir al carrito</button>
-            </mat-card-actions>
-          </mat-card-content>
-        </mat-card>
-<<<<<<< HEAD
+      <div class="products" *ngFor="let card of displayProducts">
         <mat-card >
           <mat-card-header>
             <mat-card-title-group>
@@ -103,12 +46,5 @@
 
       </div>
     </div>
-=======
-        
-      </div>
-    </div>
-    <mat-paginator [length]="100" [pageSize]="20" [pageSizeOptions]="[20,40,60]" (page)="pageEvent()"></mat-paginator>
-
->>>>>>> 0523ac815a28041fc54a8f9715e409e4f91697f3
   </div>
 </div>
