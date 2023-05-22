@@ -9,7 +9,6 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { NavbarComponent } from './components/navbar/navbar.component'
 import { FooterComponent } from './components/footer/footer.component';
-import { AdminButtonComponent } from './components/admin-button/admin-button.component'
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { provideAuth, getAuth, connectAuthEmulator } from '@angular/fire/auth';
 import { provideFirestore, getFirestore, connectFirestoreEmulator } from '@angular/fire/firestore';
@@ -22,7 +21,6 @@ import { environment } from 'src/environment/environment';
     AppComponent,
     NavbarComponent,
     FooterComponent,
-    AdminButtonComponent,
   ],
   imports: [
     BrowserModule,

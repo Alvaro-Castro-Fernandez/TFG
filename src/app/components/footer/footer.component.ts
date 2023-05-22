@@ -8,6 +8,7 @@ import { DocumentService } from 'src/app/services/document.service';
 })
 export class FooterComponent {
 
+  
   constructor(private ds: DocumentService) { }
 
 }

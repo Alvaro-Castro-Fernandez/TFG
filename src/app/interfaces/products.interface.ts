@@ -8,5 +8,6 @@ export interface ProductInterface
     stock:number,
     description:string,
     clotheSize:string[] | undefined
-    country:string[]
+    country:string[],
+    urlTo: string
 }

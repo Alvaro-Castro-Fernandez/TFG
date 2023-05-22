@@ -4,6 +4,7 @@ import { FormControl } from '@angular/forms';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { MatPaginator } from '@angular/material/paginator';
+import { Router } from '@angular/router';
 import { EMPTY, Observable, firstValueFrom } from 'rxjs';
 import { map, startWith, tap } from 'rxjs/operators';
 import { ProductInterface } from 'src/app/interfaces/products.interface';
@@ -17,8 +18,10 @@ import { DocumentService } from 'src/app/services/document.service';
 })
 export class CardItemComponent {
 
-  products: any[] = [];
-  displayProducts = [{}]
+  testArray: any[] = [];
+  products: any;
+  aux = [{}]
+  public arrProducts: any[] = [];
   separatorKeysCodes: number[] = [ENTER, COMMA];
   categotyControl = new FormControl('');
   filteredCategories!: Observable<string[]>;
@@ -30,9 +33,10 @@ export class CardItemComponent {
   obs!: Observable<any>;
 
   constructor(
-    private ds: DocumentService
+    private ds: DocumentService,
+    private router:Router
   ) {
-    this.getAllProducts()
+    this.getAllProducts();
     this.filteredCategories = this.categotyControl.valueChanges.pipe(
       startWith(null),
       map((fruit: string | null) => (fruit ? this._filter(fruit) : this.allCategories.slice())),
@@ -41,10 +45,11 @@ export class CardItemComponent {
 
   async getAllProducts() {
     this.products = await firstValueFrom(this.ds.list('products'))
-    this.displayProducts.push(this.products)
-    console.log(this.displayProducts);
+    this.aux = this.products
+    for (let index = 0; index < this.aux.length; index++) {
+      this.arrProducts.push(this.aux[index])
+    }
   }
-
 
   add(event: MatChipInputEvent): void {
     const value = (event.value || '').trim();
@@ -71,6 +76,10 @@ export class CardItemComponent {
   private _filter(value: string): string[] {
     const filterValue = value.toLowerCase();
     return this.allCategories.filter(fruit => fruit.toLowerCase().includes(filterValue));
+  }
+
+  viewProduct(id:string){
+    this.router.navigate([`/main/${id}`]);
   }
 
 }
