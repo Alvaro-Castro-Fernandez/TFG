@@ -25,3 +25,6 @@ form {
     overflow-y: scroll;
   }
   
+  .buttons{
+    padding-bottom: 2em;
+  }

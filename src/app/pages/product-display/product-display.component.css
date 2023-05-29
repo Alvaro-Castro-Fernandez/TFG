@@ -1,6 +1,9 @@
 .card {
     margin-top: 50px;
-    max-height: 375px;
+    max-height: 350px;
     max-width: 700px;
     overflow-y: scroll;
+  }
+  .buttonContainer{
+    width: 33%;
   }

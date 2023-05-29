@@ -8,6 +8,7 @@ import { DocumentService } from 'src/app/services/document.service';
 })
 export class NavbarComponent {
 
+  //Esta parte de codigo es para crear un boton temporal para meter productos temporales en la base de datos
   
   obj = [{
     name: "Gorra Suicidal Tendences",

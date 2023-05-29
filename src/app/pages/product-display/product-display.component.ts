@@ -22,7 +22,6 @@ export class ProductDisplayComponent {
   async getProduct() {
     this.productData = await this.db.getByAttrr('products/', 'id', this.productId);
     console.log(this.productData);
-    
     this.getAviableSizes = this.productData.clotheSize
     console.log(this.getAviableSizes);
     

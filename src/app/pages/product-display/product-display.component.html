@@ -5,10 +5,10 @@
         <mat-card-header>
           <mat-card-title-group>
             <mat-card-title style="font-size: 40px;">{{productData.name}}</mat-card-title>
-            <mat-card-subtitle style="font-size: 20px;">{{productData.description}}</mat-card-subtitle>
           </mat-card-title-group>
         </mat-card-header>
-        <img mat-card-xxl-image src="{{productData.urlTo}}" alt="Imagen del producto">
+        <mat-divider class="m-4"></mat-divider>
+        <img mat-card-xxl-image src="{{productData.urlTo}}" alt="No existe imagenes previas del producto">
         <mat-card-content>
         </mat-card-content>
       </mat-card>
@@ -16,91 +16,111 @@
     <div class="col-4">
       <mat-card class="m-3 p-3">
         <mat-card-header>
-          <h1>In Progress</h1>
+          <mat-card-title style="font-size: 30px;">{{productData.name}}</mat-card-title>
+          <mat-card-subtitle>{{productData.description}}</mat-card-subtitle>
+          <mat-card-subtitle>Precio del producto: {{productData.price}}€</mat-card-subtitle>
         </mat-card-header>
+        <mat-divider class="m-4"></mat-divider>
         <mat-card-content>
-          <form class="data-form">
-            <div *ngIf="getAviableSizes.length > 0">
-            <h3>Selecciona tu talla</h3>
-            <mat-button-toggle-group name="favoriteColor" aria-label="Favorite Color" *ngFor="let values of getAviableSizes">
-              <mat-button-toggle value="red">{{values}}</mat-button-toggle>
-            </mat-button-toggle-group>
-          </div>
-            <mat-form-field style="width: 100%;" appearance="outline">
-              <mat-label>PORQUE</mat-label>
-              <input matInput placeholder="DEFAULT">
-            </mat-form-field>
-            <div class="card">
-              <strong>Términos y Condiciones de Devoluciones y Reembolsos</strong>
+          <ng-container *ngIf="productData.stock >=0; then hasStock; else outOfStock">
+          </ng-container>
+          <ng-template #hasStock>
+            <form class="data-form">
+              <div *ngIf="getAviableSizes.length > 0">
+                <h3>Selecciona tu talla</h3>
+                <mat-button-toggle-group class="buttonContainer" name="favoriteColor" aria-label="Favorite Color"
+                  *ngFor="let values of getAviableSizes">
+                  <mat-button-toggle style="text-align: center;" value="{{values}}">{{values}}</mat-button-toggle>
+                </mat-button-toggle-group>
+              </div>
+              <p>Aqui tengo que implementar una funcion que te haga un display de las fechas de entrega del producto</p>
               <mat-divider></mat-divider>
-              <p>¡Gracias por elegir nuestra tienda en línea para tus compras de ropa y accesorios! Valoramos tu
-                satisfacción y queremos asegurarnos de que estés completamente satisfecho/a con tu compra. A
-                continuación,
-                encontrarás nuestros términos y condiciones para devoluciones y reembolsos:</p>
+              <strong><mat-icon>favorite_border</mat-icon>Añadir a favoritos</strong>
+              <strong><mat-icon>add_shopping_cart</mat-icon>Añadi a la cesta </strong>
+              <div class="card">
+                <strong>Términos y Condiciones de Devoluciones y Reembolsos</strong>
+                <mat-divider></mat-divider>
+                <p>¡Gracias por elegir nuestra tienda en línea para tus compras de ropa y accesorios! Valoramos tu
+                  satisfacción y queremos asegurarnos de que estés completamente satisfecho/a con tu compra. A
+                  continuación,
+                  encontrarás nuestros términos y condiciones para devoluciones y reembolsos:</p>
 
-              <strong>Política de Devoluciones:</strong>
-              <ul>
-                <li>Aceptamos devoluciones dentro de los 30 días posteriores a la fecha de entrega.</li>
-                <li>Los productos deben estar en condiciones originales, sin uso, sin lavar y con todas las etiquetas y
-                  empaques originales.</li>
-                <li>No se aceptarán devoluciones de productos íntimos, como ropa interior o trajes de baño, por razones
-                  de
-                  higiene.</li>
-                <li>No se aceptarán devoluciones de productos en oferta, a menos que estén defectuosos.</li>
-              </ul>
+                <strong>Política de Devoluciones:</strong>
+                <ul>
+                  <li>Aceptamos devoluciones dentro de los 30 días posteriores a la fecha de entrega.</li>
+                  <li>Los productos deben estar en condiciones originales, sin uso, sin lavar y con todas las etiquetas
+                    y
+                    empaques originales.</li>
+                  <li>No se aceptarán devoluciones de productos íntimos, como ropa interior o trajes de baño, por
+                    razones
+                    de
+                    higiene.</li>
+                  <li>No se aceptarán devoluciones de productos en oferta, a menos que estén defectuosos.</li>
+                </ul>
 
-              <strong>Proceso de Devolución:</strong>
-              <ul>
-                <li>Para iniciar una devolución, comunícate con nuestro servicio de atención al cliente dentro del plazo
-                  de
-                  30 días posteriores a la entrega.</li>
-                <li>Te proporcionaremos instrucciones detalladas sobre cómo devolver el producto.</li>
-                <li>El cliente es responsable de los gastos de envío asociados con la devolución, a menos que el
-                  producto
-                  sea defectuoso o se haya cometido un error por nuestra parte.</li>
-              </ul>
-              <strong>Inspección y Aprobación de Devoluciones:</strong>
-              <ul>
-                <li>Una vez que recibamos el producto devuelto, lo inspeccionaremos para verificar su estado.</li>
-                <li>Nos reservamos el derecho de rechazar la devolución si el producto no cumple con nuestras
-                  condiciones
-                  de
-                  devolución.</li>
-                <li>Si se aprueba la devolución, procesaremos el reembolso dentro de un plazo razonable.</li>
-              </ul>
-              <strong>Opciones de Reembolso:</strong>
-              <ul>
-                <li>Los reembolsos se realizarán en el mismo método de pago utilizado durante la compra.</li>
-                <li>Los reembolsos pueden demorar hasta [X] días hábiles en aparecer en tu cuenta, dependiendo de las
-                  políticas de tu entidad financiera.</li>
-              </ul>
-              <strong>Productos Defectuosos o Erróneos:</strong>
-              <ul>
-                <li>Si recibes un producto defectuoso o incorrecto, contáctanos de inmediato para que podamos solucionar
-                  el
-                  problema.</li>
-                <li>En caso de productos defectuosos, podemos ofrecerte un reemplazo o un reembolso completo, incluyendo
-                  los
-                  gastos de envío asociados.</li>
-              </ul>
+                <strong>Proceso de Devolución:</strong>
+                <ul>
+                  <li>Para iniciar una devolución, comunícate con nuestro servicio de atención al cliente dentro del
+                    plazo
+                    de
+                    30 días posteriores a la entrega.</li>
+                  <li>Te proporcionaremos instrucciones detalladas sobre cómo devolver el producto.</li>
+                  <li>El cliente es responsable de los gastos de envío asociados con la devolución, a menos que el
+                    producto
+                    sea defectuoso o se haya cometido un error por nuestra parte.</li>
+                </ul>
+                <strong>Inspección y Aprobación de Devoluciones:</strong>
+                <ul>
+                  <li>Una vez que recibamos el producto devuelto, lo inspeccionaremos para verificar su estado.</li>
+                  <li>Nos reservamos el derecho de rechazar la devolución si el producto no cumple con nuestras
+                    condiciones
+                    de
+                    devolución.</li>
+                  <li>Si se aprueba la devolución, procesaremos el reembolso dentro de un plazo razonable.</li>
+                </ul>
+                <strong>Opciones de Reembolso:</strong>
+                <ul>
+                  <li>Los reembolsos se realizarán en el mismo método de pago utilizado durante la compra.</li>
+                  <li>Los reembolsos pueden demorar hasta [X] días hábiles en aparecer en tu cuenta, dependiendo de las
+                    políticas de tu entidad financiera.</li>
+                </ul>
+                <strong>Productos Defectuosos o Erróneos:</strong>
+                <ul>
+                  <li>Si recibes un producto defectuoso o incorrecto, contáctanos de inmediato para que podamos
+                    solucionar
+                    el
+                    problema.</li>
+                  <li>En caso de productos defectuosos, podemos ofrecerte un reemplazo o un reembolso completo,
+                    incluyendo
+                    los
+                    gastos de envío asociados.</li>
+                </ul>
 
-              <strong>Cambios de Talla o Color:</strong>
-              <ul>
-                <li>No ofrecemos cambios directos de talla o color.</li>
-                <li>Si deseas obtener una talla o color diferente, deberás devolver el producto y realizar una nueva
-                  compra.
-                </li>
-              </ul>
-              <p>Ten en cuenta que nos reservamos el derecho de modificar estos términos y condiciones en cualquier
-                momento,
-                y cualquier cambio se hará efectivo inmediatamente. Te recomendamos revisar periódicamente esta página
-                para
-                estar al tanto de cualquier actualización.</p>
+                <strong>Cambios de Talla o Color:</strong>
+                <ul>
+                  <li>No ofrecemos cambios directos de talla o color.</li>
+                  <li>Si deseas obtener una talla o color diferente, deberás devolver el producto y realizar una nueva
+                    compra.
+                  </li>
+                </ul>
+                <p>Ten en cuenta que nos reservamos el derecho de modificar estos términos y condiciones en cualquier
+                  momento,
+                  y cualquier cambio se hará efectivo inmediatamente. Te recomendamos revisar periódicamente esta página
+                  para
+                  estar al tanto de cualquier actualización.</p>
 
-              <p>Si tienes alguna pregunta o necesitas más información, no dudes en contactarnos. ¡Estamos aquí para
-                ayudarte!</p>
+                <p>Si tienes alguna pregunta o necesitas más información, no dudes en contactarnos. ¡Estamos aquí para
+                  ayudarte!</p>
+              </div>
+            </form>
+          </ng-template>
+          <ng-template #outOfStock>
+            <div>
+              <mat-card-title style="color: red;">Sin Stock</mat-card-title>
+              <mat-card-subtitle>Hasta la fecha, este producto esta sin exisencias. Pruebe en otro momento del
+                dia.</mat-card-subtitle>
             </div>
-          </form>
+          </ng-template>
         </mat-card-content>
       </mat-card>
     </div>

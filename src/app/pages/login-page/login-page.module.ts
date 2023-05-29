@@ -8,9 +8,9 @@ import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
 import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
-
-
-
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatIconModule } from '@angular/material/icon';
+import {MatListModule} from '@angular/material/list';
 
 
 @NgModule({
@@ -25,6 +25,9 @@ import {MatButtonModule} from '@angular/material/button';
     MatDividerModule,
     MatInputModule,
     MatButtonModule,
+    ReactiveFormsModule,
+    MatIconModule,
+    MatListModule,
   ]
 })
 export class LoginPageModule { }

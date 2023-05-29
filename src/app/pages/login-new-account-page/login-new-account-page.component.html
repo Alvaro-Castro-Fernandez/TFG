@@ -1,33 +1,52 @@
 <div class="container">
     <div class="row">
-<<<<<<< HEAD
         <div class="col">
-            <form>
+            <form novalidate [formGroup]="account">
                 <div class="form-params">
                     <h3 class="my-4">Login Form</h3>
                     <mat-form-field class="full-width">
                         <mat-label>Correo Electronico</mat-label>
-                        <input matInput placeholder="ejemplo123@email.com">
-                    </mat-form-field>
-
-                    <mat-form-field class="full-width">
-                        <mat-label>Contraseña de la cuenta</mat-label>
-                        <input type="password" matInput #passwordLength minlength="8">
-                        <mat-hint align="end">{{passwordLength.value.length}} / 8</mat-hint>
+                        <input matInput placeholder="ejemplo123@email.com" formControlName="email">
                     </mat-form-field>
 
                     <table class="full-width" cellspacing="0">
                         <tr>
                             <td>
                                 <mat-form-field class="full-width">
+                                    <mat-label>Contraseña de la cuenta</mat-label>
+                                    <input [type]="hideP ? 'password' : 'text'" matInput #password
+                                        formControlName="password">
+                                    <button mat-icon-button matSuffix (click)="hideP = !hideP">
+                                        <mat-icon>{{hideP ? 'visibility_off' : 'visibility'}}</mat-icon>
+                                    </button>
+                                    <mat-hint align="end">{{password.value.length}}</mat-hint>
+                                </mat-form-field>
+                            </td>
+                            <td>
+                                <mat-form-field class="full-width">
+                                    <mat-label>Repetir contraseña</mat-label>
+                                    <input [type]="hideRP ? 'password' : 'text'" matInput #repeatPassword
+                                        formControlName="repeatPassword">
+                                    <button mat-icon-button matSuffix (click)="hideRP = !hideRP">
+                                        <mat-icon>{{hideRP ? 'visibility_off' : 'visibility'}}</mat-icon>
+                                    </button>
+                                    <mat-hint align="end">{{repeatPassword.value.length}}</mat-hint>
+                                </mat-form-field>
+                            </td>
+                        </tr>
+                    </table>
+                    <table class="full-width" cellspacing="0">
+                        <tr>
+                            <td>
+                                <mat-form-field class="full-width">
                                     <mat-label>Nombre</mat-label>
-                                    <input matInput>
+                                    <input matInput formControlName="name">
                                 </mat-form-field>
                             </td>
                             <td>
                                 <mat-form-field class="full-width">
                                     <mat-label>Apellidos</mat-label>
-                                    <input matInput placeholder="Minimo el primer apellido">
+                                    <input matInput placeholder="Minimo el primer apellido" formControlName="lastName">
                                 </mat-form-field>
                             </td>
                         </tr>
@@ -37,19 +56,21 @@
                             <td>
                                 <mat-form-field class="full-width">
                                     <mat-label>Ciudad</mat-label>
-                                    <input matInput placeholder="Ex. Madrid // Podria añadir el service">
+                                    <input matInput placeholder="Ex. Madrid // Podria añadir el service"
+                                        formControlName="city">
                                 </mat-form-field>
                             </td>
                             <td>
                                 <mat-form-field class="full-width">
                                     <mat-label>Provincia</mat-label>
-                                    <input matInput placeholder="// Podria añadir el service">
+                                    <input matInput placeholder="// Podria añadir el service"
+                                        formControlName="district">
                                 </mat-form-field>
                             </td>
                             <td>
                                 <mat-form-field class="full-width">
                                     <mat-label>Codigo postal</mat-label>
-                                    <input matInput #postalCode maxlength="5">
+                                    <input matInput #postalCode maxlength="5" formControlName="postalCode">
                                     <mat-hint align="end">{{postalCode.value.length}} / 5</mat-hint>
                                 </mat-form-field>
                             </td>
@@ -58,12 +79,13 @@
                     <p>
                         <mat-form-field class="full-width">
                             <mat-label>Direccion de domicilio</mat-label>
-                            <input matInput placeholder="Ejemplo: Calle Amapola 35, 3 IZQ">
+                            <input matInput placeholder="Ejemplo: Calle Amapola 35, 3 IZQ" formControlName="adress">
                         </mat-form-field>
                     </p>
                     <div class="buttons">
-                        <button mat-raised-button color="primary" (click)="onSubmitForm()">Crear Cuenta</button>
-                        <button mat-button color="primary" (click)="unsubmit($event)" routerLink="/login">Usar cuenta exixtente</button>
+                        <button mat-raised-button color="primary" (click)="onSubmit()">Crear Cuenta</button>
+                        <button mat-button color="primary" (click)="unsubmit($event)" routerLink="/login">Usar cuenta
+                            exixtente</button>
                     </div>
                 </div>
                 <div class="col py-4">
@@ -129,7 +151,8 @@
                         <mat-divider></mat-divider>
                         <mat-card-actions>
                             <div class="m-2">
-                                <input type="checkbox" mat-button><label>He leido y acepto las condiciones de
+                                <input type="checkbox" mat-button formControlName="iAgree"><label
+                                    style="margin-left: 10px;">He leido y acepto las condiciones de
                                     uso</label>
                             </div>
                         </mat-card-actions>
