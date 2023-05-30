@@ -26,6 +26,10 @@ const routes: Routes = [
     path: 'onSale',
     loadChildren: () => import('./pages/on-sales-page/on-sales-page.module').then(m => m.OnSalesPageModule)
   },
+  {
+    path: 'shoppingList',
+    loadChildren: () => import('./pages/shopping-list/shopping-list.module').then(m => m.ShoppingListModule)
+  },
 
 
 ];

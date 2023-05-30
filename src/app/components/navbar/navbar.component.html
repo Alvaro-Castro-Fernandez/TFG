@@ -24,11 +24,44 @@
                     <mat-icon>account_circle</mat-icon>Iniciar sesion
                 </a>
             </li>
-            <!-- <li class="nav-item">
-                <a class="nav-link text-light d-flex align-items-center" (click)="addToDB()">
-                    <mat-icon>account_circle</mat-icon>Añadir valores
+        </ul>
+    </div>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+            <li class="nav-item active">
+                <a class="nav-link text-light d-flex align-items-center" mat-icon-button [matMenuTriggerFor]="menu"  style="cursor: pointer;">
+                    <mat-icon>account_circle</mat-icon>Perfil
                 </a>
-            </li> -->
+                <mat-menu #menu="matMenu">
+                    <div class="profileDisplay">
+                        <div>
+                            <mat-icon>account_circle</mat-icon>
+                        </div>
+                        <div>
+                            <p>Nombre de la cuenta</p>
+                            <span>Correo de la cuenta</span>
+                        </div>
+                    </div>
+                    <mat-divider></mat-divider>
+                    <button mat-menu-item  style="cursor: pointer;">
+                        <mat-icon>event_available</mat-icon>
+                        <span>Mis pedidos</span>
+                    </button>
+                    <button mat-menu-item (click)="navigateToDeliveries()" style="cursor: pointer;">
+                        <mat-icon>notifications_off</mat-icon>
+                        <span>Disable alerts</span>
+                    </button>
+                    <button mat-menu-item (click)="navigateToShoppingList()"  style="cursor: pointer;">
+                        <mat-icon>shopping_cart</mat-icon>
+                        <span>Mi carrito</span>
+                    </button>
+                    <button mat-menu-item (click)="logout()"  style="cursor: pointer;">
+                        <mat-icon>highlight_off</mat-icon>
+                        <span>Cerrar Sesion</span>
+                    </button>
+
+                </mat-menu>
+            </li>
         </ul>
     </div>
 </nav>

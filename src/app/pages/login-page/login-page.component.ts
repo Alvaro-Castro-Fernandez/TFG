@@ -46,10 +46,10 @@ export class LoginPageComponent implements OnInit {
   }
 
   async onSubmit() {
-    this.accountData = await this.ds.getByAttrr("/accounts","email",this.loginAccount.get("email")?.value)
-    if(this.accountData.email === this.loginAccount.get("email")?.value){
+    this.accountData = await this.ds.getByAttrr("/accounts", "email", this.loginAccount.get("email")?.value)
+    if (this.accountData.email === this.loginAccount.get("email")?.value) {
       this.authS.loginAnExistingAccount({ email: this.loginAccount.get("email")!.value, password: this.loginAccount.get("password")!.value })
-        .then(async response => {
+        .then(async () => {
           console.log("Creando cuenta...");
           await this.ds.create('/accounts', this.loginAccount.value)
           console.log("Cuenta creada con exito.");
@@ -60,15 +60,21 @@ export class LoginPageComponent implements OnInit {
 
   loginWithAGoogleAccount() {
     this.authS.loginWithGoogle()
-      .then(response => {
-        console.log(response);
-      })
-      .catch(error => {
-        console.log(error);
-
+      .then(async value => {
+        let fullName = value.user.displayName?.split(" ");
+        console.log(value);
+        await this.ds.create('/accounts', {
+          id: value.user.uid, 
+          name : fullName![0],
+          lastName : fullName![1] + " " + fullName![2],
+          email: value.user.email,
+        })
+        console.log("Cuenta creada con exito.");
+        this.route.navigate(['/main']);
       })
   }
 
 }
+
 
 

@@ -16,6 +16,9 @@ import { provideFunctions, getFunctions } from '@angular/fire/functions';
 import { provideStorage, getStorage } from '@angular/fire/storage';
 import { environment } from 'src/environment/environment';
 import { AuthService } from './services/auth.service';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatDividerModule } from '@angular/material/divider';
+
 
 @NgModule({
   declarations: [
@@ -68,7 +71,9 @@ import { AuthService } from './services/auth.service';
     MatCardModule,
     MatIconModule,
     MatInputModule,
-    
+    MatMenuModule,
+    MatDividerModule,
+
   ],
   providers: [AuthService],
   bootstrap: [AppComponent]

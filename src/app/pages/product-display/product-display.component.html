@@ -28,15 +28,24 @@
             <form class="data-form">
               <div *ngIf="getAviableSizes.length > 0">
                 <h3>Selecciona tu talla</h3>
-                <mat-button-toggle-group class="buttonContainer" name="favoriteColor" aria-label="Favorite Color"
-                  *ngFor="let values of getAviableSizes">
-                  <mat-button-toggle style="text-align: center;" value="{{values}}">{{values}}</mat-button-toggle>
+                <mat-button-toggle-group class="buttonContainer" *ngFor="let values of getAviableSizes">
+                  <mat-button-toggle class="buttons" value={{values}}>{{values}}</mat-button-toggle>
                 </mat-button-toggle-group>
               </div>
               <p>Aqui tengo que implementar una funcion que te haga un display de las fechas de entrega del producto</p>
               <mat-divider></mat-divider>
-              <strong><mat-icon>favorite_border</mat-icon>Añadir a favoritos</strong>
-              <strong><mat-icon>add_shopping_cart</mat-icon>Añadi a la cesta </strong>
+              <div style="display:flex; justify-content: space-around; margin-top: 2em;">
+                <strong>
+                  <a class=" d-flex align-items-center" style="cursor: pointer;">
+                    <mat-icon>favorite_border</mat-icon>
+                    Añadir a favoritos</a>
+                </strong>
+                <strong>
+                  <a class="d-flex align-items-center" style="cursor: pointer;" (click)="AddToTheShoppingList()">
+                    <mat-icon>add_shopping_cart</mat-icon>
+                    Añadi a la cesta</a>
+                </strong>
+              </div>
               <div class="card">
                 <strong>Términos y Condiciones de Devoluciones y Reembolsos</strong>
                 <mat-divider></mat-divider>

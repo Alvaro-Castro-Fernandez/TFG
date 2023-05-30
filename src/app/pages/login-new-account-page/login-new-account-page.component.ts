@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { Router, RouterLink } from '@angular/router';
+import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { DocumentService } from 'src/app/services/document.service';
 
@@ -11,14 +11,16 @@ import { DocumentService } from 'src/app/services/document.service';
 })
 export class LoginNewAccountPageComponent implements OnInit {
 
-  hideRP:boolean = true
-  hideP:boolean = true
+  hideRP: boolean = true
+  hideP: boolean = true
   account!: FormGroup;
+  comparator: any
+  accData: any
 
   constructor(
     private authS: AuthService,
     private ds: DocumentService,
-    private router : Router
+    private router: Router
   ) {
     this.account = new FormGroup({
       password: new FormControl(''),
@@ -37,18 +39,27 @@ export class LoginNewAccountPageComponent implements OnInit {
   unsubmit(event: Event) {
     event.preventDefault();
   }
-  onSubmit() {
+
+  async checkIfExist() {
+    this.comparator = await this.ds.getByAttrr("/accounts", "email", this.account.get("email")?.value);
+    if (this.comparator === undefined) {
+      this.submitForm();
+    } else {
+      this.account.reset();
+    }
+  }
+
+  submitForm() {
     if (this.account.get("password")!.value === this.account.get("repeatPassword")!.value) {
-      this.authS.createNewUser({ email: this.account.get("email")!.value, password: this.account.get("password")!.value })
-        .then(async response => {
-          console.log("Creando cuenta...");
-          await this.ds.create('/accounts', this.account.value)
-          console.log("Cuenta creada con exito.");
-          this.router.navigate(['/main']);
+      this.authS.createNewUser({ email: this.account.get("email")?.value, password: this.account.get("password")?.value })
+        .then(async data => {
+          this.accData = await this.ds.create("/accounts", { ...this.account.value, id: data.user.uid })
+          console.log(this.accData);
+          this.router.navigate(["/main"]);
         })
         .catch(error => console.log(error))
     } else {
-      // Las contraseñas no coinciden (Deberia borrar los imputs de las contraseñas o borrar el formulario entero?)
+      this.account.reset()
     }
   }
 
