@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
+import { Auth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
+import { firstValueFrom } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
 import { DocumentService } from 'src/app/services/document.service';
 
@@ -10,26 +12,45 @@ import { DocumentService } from 'src/app/services/document.service';
 })
 export class NavbarComponent {
 
-
+  userData: any
+  userId: string = ""
 
   constructor(
-    private db: DocumentService,
+    private ds: DocumentService,
     private AuthS: AuthService,
-    private route: Router
+    private route: Router,
+    private auth: Auth
   ) {
-
+    this.getUserData()
+    this.currentUserIsLogged()
   }
 
-  async logout(){
+  async logout() {
     await this.AuthS.logoutCurrentAccount();
   }
 
-  navigateToShoppingList(){
+  navigateToShoppingList() {
     this.route.navigate(["/shoppingList"])
   }
 
-  navigateToDeliveries(){
+  navigateToDeliveries() {
     this.route.navigate(["/shopping-list"])
   }
 
+
+  currentUserIsLogged() {
+    if (this.auth.currentUser) {
+      this.userId = this.auth.currentUser.uid
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  async getUserData() {
+    console.log(this.userId);
+    this.userData = await firstValueFrom(this.ds.get("/accounts/" + this.auth.currentUser!.uid))
+    console.log("asdasd" + this.userData);
+  }
 }
+

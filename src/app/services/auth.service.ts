@@ -6,7 +6,10 @@ import {
   signOut,
   signInWithPopup,
   GoogleAuthProvider,
+  authState,
+  updateProfile
 } from '@angular/fire/auth';
+import { firstValueFrom } from 'rxjs';
 
 
 @Injectable({
@@ -14,13 +17,26 @@ import {
 })
 export class AuthService {
 
-  constructor(private auth: Auth) { }
+  user = authState(this.auth);
+  user$ = this.user;
 
-  createNewUser({ email, password }: any) {
-    return createUserWithEmailAndPassword(this.auth, email, password);
+  constructor(private auth: Auth) { }
+  
+
+  async createNewUser({ email, password, displayName }: any) {
+    const registrer = await createUserWithEmailAndPassword(this.auth, email, password);
+    const user = await firstValueFrom(this.user$);
+    if (user) {
+      await updateProfile(user, {displayName: displayName})
+    }
+    return registrer
   }
 
-  loginAnExistingAccount({ email, password }: any) {
+  /* loginAnExistingAccount({ email, password }: any) {
+    return signInWithEmailAndPassword(this.auth, email, password)
+  } */
+
+  loginAnExistingAccount(email: string, password: string) {
     return signInWithEmailAndPassword(this.auth, email, password)
   }
 
@@ -37,3 +53,4 @@ export class AuthService {
   }
 
 }
+5

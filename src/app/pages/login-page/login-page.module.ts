@@ -6,11 +6,12 @@ import { LoginPageComponent } from './login-page.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
-import {MatInputModule} from '@angular/material/input';
-import {MatButtonModule} from '@angular/material/button';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
-import {MatListModule} from '@angular/material/list';
+import { MatListModule } from '@angular/material/list';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 
 @NgModule({
@@ -28,6 +29,9 @@ import {MatListModule} from '@angular/material/list';
     ReactiveFormsModule,
     MatIconModule,
     MatListModule,
+    MatSnackBarModule
+    ,
+
   ]
 })
 export class LoginPageModule { }

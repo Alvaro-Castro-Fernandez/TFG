@@ -1,38 +1,42 @@
 <div class="container">
     <div class="row">
         <div class="col">
-            <mat-card class="loginCard">
-                <mat-card-header class="full-size">
-                    <mat-card-title>
-                        <p class="title">Iniciar sesión</p>
-                    </mat-card-title>
-                </mat-card-header>
-                <mat-card-content class="full-size">
-                    <form novalidate [formGroup]="loginAccount">
-                        <mat-form-field class="full-size">
-                            <mat-label>Correo Electronico</mat-label>
-                            <input type="email" matInput formControlName="email" placeholder="ejemplo123@email.com">
-                            <mat-error>A new Error has ocurred</mat-error>
-                        </mat-form-field>
-                        <br>
-                        <mat-form-field class="full-size">
-                            <mat-label>Contraseña de la cuenta</mat-label>
-                            <input [type]="hide ? 'password' : 'text'" matInput #password formControlName="password">
-                            <button mat-icon-button matSuffix (click)="hide = !hide">
-                                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-                            </button>
-                            <mat-hint align="end">{{password.value.length}}</mat-hint>
-                        </mat-form-field>
-                        <div class="buttons">
-                            <button mat-raised-button color="primary" class="button" (click)="onSubmit()">Iniciar Sesion</button>
-                            <button mat-button color="primary" class="button" routerLink="/login/newAccount"
-                                (click)="unsubmit($event)">Crear una cuenta</button>
-                            <button mat-button color="primary" class="button" (click)="loginWithAGoogleAccount()">Iniciar
-                                sesion con Google</button>
-                        </div>
-                    </form>
-                </mat-card-content>
-            </mat-card>
+            <div class="asas">
+                <mat-card class="loginCard">
+                    <mat-card-header class="full-size">
+                        <mat-card-title>
+                            <p class="title">Iniciar sesión</p>
+                        </mat-card-title>
+                    </mat-card-header>
+                    <mat-card-content class="full-size">
+                        <form novalidate [formGroup]="loginAccount">
+                            <mat-form-field class="full-size">
+                                <mat-label>Correo Electronico</mat-label>
+                                <input type="email" matInput formControlName="email" placeholder="ejemplo123@email.com">
+                            </mat-form-field>
+                            <br>
+                            <mat-form-field class="full-size">
+                                <mat-label>Contraseña de la cuenta</mat-label>
+                                <input [type]="hide ? 'password' : 'text'" matInput #password
+                                    formControlName="password">
+                                <button mat-icon-button matSuffix (click)="hide = !hide">
+                                    <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                                </button>
+                                <mat-hint align="end">{{password.value.length}}</mat-hint>
+                            </mat-form-field>
+                            <div class="buttons">
+                                <button mat-raised-button color="primary" class="button" (click)="onSubmit()">Iniciar
+                                    Sesion</button>
+                                <button mat-stroked-button color="primary" class="button"
+                                    routerLink="/login/newAccount">Crear una cuenta</button>
+                                <button mat-stroked-button color="primary" class="button"
+                                    (click)="loginWithAGoogleAccount()">Iniciar
+                                    sesion con Google</button>
+                            </div>
+                        </form>
+                    </mat-card-content>
+                </mat-card>
+            </div>
         </div>
     </div>
 </div>

@@ -1,13 +1,11 @@
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
-import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { MatChipInputEvent } from '@angular/material/chips';
-import { MatPaginator } from '@angular/material/paginator';
 import { Router } from '@angular/router';
-import { EMPTY, Observable, firstValueFrom } from 'rxjs';
-import { map, startWith, tap } from 'rxjs/operators';
-import { ProductInterface } from 'src/app/interfaces/products.interface';
+import { Observable, firstValueFrom } from 'rxjs';
+import { map, startWith } from 'rxjs/operators';
 import { DocumentService } from 'src/app/services/document.service';
 
 
@@ -26,7 +24,7 @@ export class CardItemComponent {
   categotyControl = new FormControl('');
   filteredCategories!: Observable<string[]>;
   categories: string[] = ['Todo'];
-  allCategories: string[] = ['Este array', 'Estara lleno', 'con todas las', 'categorias de los', 'productos en la bdd'];
+  allCategories: any[] = [];
 
   @ViewChild('categoryInput')
   arrInput!: ElementRef<HTMLInputElement>;
@@ -34,13 +32,10 @@ export class CardItemComponent {
 
   constructor(
     private ds: DocumentService,
-    private router:Router
+    private router: Router
   ) {
     this.getAllProducts();
-    this.filteredCategories = this.categotyControl.valueChanges.pipe(
-      startWith(null),
-      map((fruit: string | null) => (fruit ? this._filter(fruit) : this.allCategories.slice())),
-    );
+    this.getAllCategories()
   }
 
   async getAllProducts() {
@@ -51,35 +46,26 @@ export class CardItemComponent {
     }
   }
 
-  add(event: MatChipInputEvent): void {
-    const value = (event.value || '').trim();
-    if (value) {
-      this.categories.push(value);
-    }
-    event.chipInput!.clear();
-    this.categotyControl.setValue(null);
-  }
-
-  remove(fruit: string): void {
-    const index = this.categories.indexOf(fruit);
+ 
+  remove(data: string): void {
+    const index = this.categories.indexOf(data);
     if (index >= 0) {
       this.categories.splice(index, 1);
     }
   }
 
-  selected(event: MatAutocompleteSelectedEvent): void {
-    this.categories.push(event.option.viewValue);
-    this.arrInput.nativeElement.value = '';
-    this.categotyControl.setValue(null);
-  }
-
-  private _filter(value: string): string[] {
-    const filterValue = value.toLowerCase();
-    return this.allCategories.filter(fruit => fruit.toLowerCase().includes(filterValue));
-  }
-
-  viewProduct(id:string){
+  viewProduct(id: string) {
     this.router.navigate([`/main/${id}`]);
   }
 
+  async getAllCategories() {
+    let aux: any = await firstValueFrom(this.ds.list("/products"));
+    // console.log(aux);
+    for (let x = 0; x < aux.length; x++) {
+      for (let y = 0; y < aux[x].categories.length; y++) {
+        // console.log(aux[x].categories[y]);
+        this.allCategories.push(aux[x].categories[y].value)
+      }
+    }
+  }
 }

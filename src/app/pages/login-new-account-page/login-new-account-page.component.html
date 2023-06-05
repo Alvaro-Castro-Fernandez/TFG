@@ -3,100 +3,104 @@
         <div class="col">
             <form novalidate [formGroup]="account">
                 <div class="form-params">
-                    <h3 class="my-4">Login Form</h3>
-                    <mat-form-field class="full-width">
-                        <mat-label>Correo Electronico</mat-label>
-                        <input matInput placeholder="ejemplo123@email.com" formControlName="email">
-                    </mat-form-field>
+                    <mat-card class="m-2 p-2">
+                        <mat-card-title-group>
+                            <mat-card-title style="font-size: 40px; margin: 30px;">Crea tu cuenta</mat-card-title>
+                        </mat-card-title-group>
+                        <mat-divider></mat-divider>
+                        <mat-card-content style="margin-top: 20px;">
+                            <mat-form-field class="full-width">
+                                <mat-label>Correo Electronico</mat-label>
+                                <input matInput placeholder="ejemplo123@email.com" formControlName="email">
+                            </mat-form-field>
 
-                    <table class="full-width" cellspacing="0">
-                        <tr>
-                            <td>
-                                <mat-form-field class="full-width">
-                                    <mat-label>Contraseña de la cuenta</mat-label>
-                                    <input [type]="hideP ? 'password' : 'text'" matInput #password
-                                        formControlName="password">
-                                    <button mat-icon-button matSuffix (click)="hideP = !hideP">
-                                        <mat-icon>{{hideP ? 'visibility_off' : 'visibility'}}</mat-icon>
-                                    </button>
-                                    <mat-hint align="end">{{password.value.length}}</mat-hint>
-                                </mat-form-field>
-                            </td>
-                            <td>
-                                <mat-form-field class="full-width">
-                                    <mat-label>Repetir contraseña</mat-label>
-                                    <input [type]="hideRP ? 'password' : 'text'" matInput #repeatPassword
-                                        formControlName="repeatPassword">
-                                    <button mat-icon-button matSuffix (click)="hideRP = !hideRP">
-                                        <mat-icon>{{hideRP ? 'visibility_off' : 'visibility'}}</mat-icon>
-                                    </button>
-                                    <mat-hint align="end">{{repeatPassword.value.length}}</mat-hint>
-                                </mat-form-field>
-                            </td>
-                        </tr>
-                    </table>
-                    <table class="full-width" cellspacing="0">
-                        <tr>
-                            <td>
-                                <mat-form-field class="full-width">
-                                    <mat-label>Nombre</mat-label>
-                                    <input matInput formControlName="name">
-                                </mat-form-field>
-                            </td>
-                            <td>
-                                <mat-form-field class="full-width">
-                                    <mat-label>Apellidos</mat-label>
-                                    <input matInput placeholder="Minimo el primer apellido" formControlName="lastName">
-                                </mat-form-field>
-                            </td>
-                        </tr>
-                    </table>
-                    <table class="full-width" cellspacing="0">
-                        <tr>
-                            <td>
-                                <mat-form-field class="full-width">
-                                    <mat-label>Ciudad</mat-label>
-                                    <input matInput placeholder="Ex. Madrid // Podria añadir el service"
-                                        formControlName="city">
-                                </mat-form-field>
-                            </td>
-                            <td>
-                                <mat-form-field class="full-width">
-                                    <mat-label>Provincia</mat-label>
-                                    <input matInput placeholder="// Podria añadir el service"
-                                        formControlName="district">
-                                </mat-form-field>
-                            </td>
-                            <td>
-                                <mat-form-field class="full-width">
-                                    <mat-label>Codigo postal</mat-label>
-                                    <input matInput #postalCode maxlength="5" formControlName="postalCode">
-                                    <mat-hint align="end">{{postalCode.value.length}} / 5</mat-hint>
-                                </mat-form-field>
-                            </td>
-                        </tr>
-                    </table>
-                    <p>
-                        <mat-form-field class="full-width">
-                            <mat-label>Direccion de domicilio</mat-label>
-                            <input matInput placeholder="Ejemplo: Calle Amapola 35, 3 IZQ" formControlName="adress">
-                        </mat-form-field>
-                    </p>
+                            <table class="full-width" cellspacing="0">
+                                <tr>
+                                    <td>
+                                        <mat-form-field class="full-width">
+                                            <mat-label>Contraseña de la cuenta</mat-label>
+                                            <input [type]="hideP ? 'password' : 'text'" matInput #password
+                                                formControlName="password">
+                                            <button mat-icon-button matSuffix (click)="hideP = !hideP">
+                                                <mat-icon>{{hideP ? 'visibility_off' : 'visibility'}}</mat-icon>
+                                            </button>
+                                            <mat-hint align="end">{{password.value.length}}</mat-hint>
+                                        </mat-form-field>
+                                    </td>
+                                    <td>
+                                        <mat-form-field class="full-width">
+                                            <mat-label>Repetir contraseña</mat-label>
+                                            <input [type]="hideRP ? 'password' : 'text'" matInput #repeatPassword
+                                                formControlName="repeatPassword">
+                                            <button mat-icon-button matSuffix (click)="hideRP = !hideRP">
+                                                <mat-icon>{{hideRP ? 'visibility_off' : 'visibility'}}</mat-icon>
+                                            </button>
+                                            <mat-hint align="end">{{repeatPassword.value.length}}</mat-hint>
+                                        </mat-form-field>
+                                    </td>
+                                </tr>
+                            </table>
+                            <table class="full-width" cellspacing="0">
+                                <tr>
+                                    <td>
+                                        <mat-form-field class="full-width">
+                                            <mat-label>Nombre</mat-label>
+                                            <input matInput formControlName="name">
+                                        </mat-form-field>
+                                    </td>
+                                    <td>
+                                        <mat-form-field class="full-width">
+                                            <mat-label>Apellidos</mat-label>
+                                            <input matInput placeholder="Minimo el primer apellido"
+                                                formControlName="lastName">
+                                        </mat-form-field>
+                                    </td>
+                                </tr>
+                            </table>
+                            <table class="full-width" cellspacing="0">
+                                <tr>
+                                    <td>
+                                        <mat-form-field class="full-width">
+                                            <mat-label>Ciudad</mat-label>
+                                            <input matInput placeholder="Ex. Madrid " formControlName="city">
+                                        </mat-form-field>
+                                    </td>
+                                    <td>
+                                        <mat-form-field class="full-width">
+                                            <mat-label>Provincia</mat-label>
+                                            <input matInput placeholder="Ex: Madrid" formControlName="district">
+                                        </mat-form-field>
+                                    </td>
+                                    <td>
+                                        <mat-form-field class="full-width">
+                                            <mat-label>Codigo postal</mat-label>
+                                            <input matInput #postalCode maxlength="5" formControlName="postalCode">
+                                            <mat-hint align="end">{{postalCode.value.length}} / 5</mat-hint>
+                                        </mat-form-field>
+                                    </td>
+                                </tr>
+                            </table>
+                            <mat-form-field class="full-width">
+                                <mat-label>Direccion de domicilio</mat-label>
+                                <input matInput placeholder="Ejemplo: Calle Amapola 35, 3 IZQ" formControlName="adress">
+                            </mat-form-field>
+                        </mat-card-content>
+                    </mat-card>
                     <div class="buttons">
                         <button mat-raised-button color="primary" (click)="checkIfExist()">Crear Cuenta</button>
-                        <button mat-button color="primary" (click)="unsubmit($event)" routerLink="/login">Usar cuenta
+                        <button mat-button color="primary" routerLink="/login">Usar cuenta
                             exixtente</button>
                     </div>
                 </div>
-                <div class="col py-4">
+                <div class="col py-2">
                     <mat-card class="card">
                         <mat-card-header>
                             <mat-card-title-group>
-                                <mat-card-title>Terminos de Condiciones de Uso</mat-card-title>
+                                <mat-card-title>Acepta los Terminos de Condiciones de Uso</mat-card-title>
                             </mat-card-title-group>
                         </mat-card-header>
                         <mat-card-content>
-                            <mat-divider></mat-divider>
+                            <mat-divider style="margin-top: 10px; margin-bottom: 10px;"></mat-divider>
                             <strong>1. Uso de la Página Web</strong>
                             <p>Nuestra página web es solo para fines de prueba y experimentación, y no se debe
                                 utilizar

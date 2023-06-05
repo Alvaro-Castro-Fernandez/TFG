@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { DocumentService } from 'src/app/services/document.service';
+import { firstValueFrom } from 'rxjs';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -27,18 +29,15 @@ export class LoginPageComponent implements OnInit {
     private route: Router,
     private authS: AuthService,
     private ds: DocumentService,
+    private snackbar:MatSnackBar
   ) {
     this.loginAccount = new FormGroup({
-      password: new FormControl(''),
       email: new FormControl(''),
+      password: new FormControl(''),
     })
   }
 
   ngOnInit(): void {
-  }
-
-  unsubmit(event: Event) {
-    event.preventDefault()
   }
 
   createNewAccount() {
@@ -46,15 +45,15 @@ export class LoginPageComponent implements OnInit {
   }
 
   async onSubmit() {
-    this.accountData = await this.ds.getByAttrr("/accounts", "email", this.loginAccount.get("email")?.value)
-    if (this.accountData.email === this.loginAccount.get("email")?.value) {
-      this.authS.loginAnExistingAccount({ email: this.loginAccount.get("email")!.value, password: this.loginAccount.get("password")!.value })
-        .then(async () => {
-          console.log("Creando cuenta...");
-          await this.ds.create('/accounts', this.loginAccount.value)
-          console.log("Cuenta creada con exito.");
-          this.route.navigate(['/main']);
-        })
+    try {
+      await this.authS.loginAnExistingAccount(this.loginAccount.get("email")!.value, this.loginAccount.get("password")!.value);
+        console.log("Login exitoso.");
+        this.route.navigate(['/main']);
+        const user = await firstValueFrom(this.authS.user$);
+        this.openSnackBar("Sesion iniciada. Bienvenido/a!","Cerrar")
+    } catch (error) {
+      this.openSnackBar("Los datos introducidos no coinciden","Cerrar")
+      this.loginAccount.reset();
     }
   }
 
@@ -64,14 +63,18 @@ export class LoginPageComponent implements OnInit {
         let fullName = value.user.displayName?.split(" ");
         console.log(value);
         await this.ds.create('/accounts', {
-          id: value.user.uid, 
-          name : fullName![0],
-          lastName : fullName![1] + " " + fullName![2],
+          id: value.user.uid,
+          name: fullName![0],
+          lastName: fullName![1] + " " + fullName![2],
           email: value.user.email,
         })
-        console.log("Cuenta creada con exito.");
+        this.openSnackBar("Sesion iniciada. Bienvenido/a!","Cerrar")
         this.route.navigate(['/main']);
       })
+  }
+
+  openSnackBar(args:string, action:string){
+    this.snackbar.open(args,action);
   }
 
 }

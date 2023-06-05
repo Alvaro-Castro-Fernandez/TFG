@@ -6,3 +6,36 @@
     flex-wrap: wrap;
     padding-bottom: 2rem;
 }
+
+mat-card {
+    width: 300px;
+}
+
+.cardTitleGroup {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.cardImage {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+img{
+    max-width: auto;
+    max-height: auto;
+}
+
+.lineThrought {
+    text-decoration: line-through;
+    margin-left: 10px;
+    margin-right: 1em;
+}
+
+.cardContainer {
+    cursor: pointer;
+}

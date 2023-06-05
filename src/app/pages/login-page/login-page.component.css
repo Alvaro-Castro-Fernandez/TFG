@@ -2,27 +2,28 @@ span {
   font-weight: bolder;
 }
 
-.buttons{
-  display:flex;
+.buttons {
+  display: flex;
   flex-direction: column;
-align-items: center;
+  align-items: center;
+  gap: 10px;
 }
 
-.button{
+.button {
   max-width: 300px;
 }
 
-.loginCard{
+.loginCard {
   max-width: 600px;
   margin: 3em;
   align-items: center;
 }
 
-.title{
+.title {
   font-size: x-large;
   margin: 1em;
 }
 
-.full-size{
+.full-size {
   width: 100%;
 }

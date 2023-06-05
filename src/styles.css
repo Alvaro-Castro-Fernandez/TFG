@@ -11,8 +11,8 @@ body {
 }
 
 body {
-    background-image: radial-gradient(#000000 0.5px, transparent 0.5px), radial-gradient(#000000 0.5px, transparent 0.5px);
+    background-image: radial-gradient(#000000 0.75px, transparent 0.75px), radial-gradient(#000000 0.75px, transparent 0.75px);
     background-size: 10px 10px;
     background-position: 0 0, 5px 5px;
-    background-color: #dad9d9;
+    background-color: #c7c7c7;
 }

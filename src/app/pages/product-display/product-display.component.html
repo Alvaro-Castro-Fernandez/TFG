@@ -1,5 +1,5 @@
 <div class="container">
-  <div class="row -4" *ngIf="productData">
+  <div class="row my-4" *ngIf="productData">
     <div class="col-8">
       <mat-card class="m-3 p-3">
         <mat-card-header>
@@ -8,35 +8,56 @@
           </mat-card-title-group>
         </mat-card-header>
         <mat-divider class="m-4"></mat-divider>
-        <img mat-card-xxl-image src="{{productData.urlTo}}" alt="No existe imagenes previas del producto">
+        <img mat-card-xxl-image src="../../../assets/images/{{productData.urlTo}}" alt="No existe imagenes previas del producto">
         <mat-card-content>
         </mat-card-content>
       </mat-card>
     </div>
     <div class="col-4">
       <mat-card class="m-3 p-3">
-        <mat-card-header>
+
+        <mat-card-header *ngIf="productData.discount;">
+          <mat-card-title style="font-size: 30px;">{{productData.name}}</mat-card-title>
+          <mat-card-subtitle>{{productData.description}}</mat-card-subtitle>
+          <mat-card-subtitle>Precio del producto: {{productData.price - (productData.price * (productData.discount/100))}}€</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-header *ngIf="!productData.discount;">
           <mat-card-title style="font-size: 30px;">{{productData.name}}</mat-card-title>
           <mat-card-subtitle>{{productData.description}}</mat-card-subtitle>
           <mat-card-subtitle>Precio del producto: {{productData.price}}€</mat-card-subtitle>
         </mat-card-header>
+
         <mat-divider class="m-4"></mat-divider>
+
         <mat-card-content>
           <ng-container *ngIf="productData.stock >=0; then hasStock; else outOfStock">
           </ng-container>
           <ng-template #hasStock>
-            <form class="data-form">
+            <form novalidate [formGroup]="productForm">
+
               <div *ngIf="getAviableSizes.length > 0">
-                <h3>Selecciona tu talla</h3>
-                <mat-button-toggle-group class="buttonContainer" *ngFor="let values of getAviableSizes">
-                  <mat-button-toggle class="buttons" value={{values}}>{{values}}</mat-button-toggle>
-                </mat-button-toggle-group>
+                <div style="display:flex; justify-content: center;">
+                  <mat-form-field>
+                    <mat-label>Seleciona tu talla</mat-label>
+                    <mat-select formControlName="size">
+                      <mat-option *ngFor="let values of getAviableSizes" value={{values}}>{{values}}</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
               </div>
-              <p>Aqui tengo que implementar una funcion que te haga un display de las fechas de entrega del producto</p>
+
+              <div style="display: flex; justify-content: center;">
+                <mat-form-field>
+                  <mat-label>Introduce la cantidad</mat-label>
+                  <input type="number" matInput #ammount maxlength="2" formControlName="ammount" placeholder="Solo valores numericos">
+                  <mat-hint align="end">{{ammount.value.length}} / 2</mat-hint>
+                </mat-form-field>
+              </div>
               <mat-divider></mat-divider>
+
               <div style="display:flex; justify-content: space-around; margin-top: 2em;">
                 <strong>
-                  <a class=" d-flex align-items-center" style="cursor: pointer;">
+                  <a class=" d-flex align-items-center" style="cursor: pointer;" (click)="AddToTheFavList()">
                     <mat-icon>favorite_border</mat-icon>
                     Añadir a favoritos</a>
                 </strong>
@@ -46,6 +67,7 @@
                     Añadi a la cesta</a>
                 </strong>
               </div>
+
               <div class="card">
                 <strong>Términos y Condiciones de Devoluciones y Reembolsos</strong>
                 <mat-divider></mat-divider>
@@ -123,11 +145,24 @@
               </div>
             </form>
           </ng-template>
+          
           <ng-template #outOfStock>
             <div>
               <mat-card-title style="color: red;">Sin Stock</mat-card-title>
               <mat-card-subtitle>Hasta la fecha, este producto esta sin exisencias. Pruebe en otro momento del
                 dia.</mat-card-subtitle>
+                <mat-card-content>
+                  <div style="display:flex; justify-content: space-between; margin-top: 2em; align-items: center;">
+                    <strong>
+                      <a class=" d-flex align-items-center" style="cursor: pointer;" (click)="AddToTheFavList()">
+                        <mat-icon>favorite_border</mat-icon>
+                        Añadir a favoritos</a>
+                    </strong>
+                  <button mat-raised-button color="primary" routerLink="/main">Volver al inicio</button>
+                </div>
+
+                </mat-card-content>
+
             </div>
           </ng-template>
         </mat-card-content>

@@ -32,39 +32,19 @@ import { MatDividerModule } from '@angular/material/divider';
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => {
       const auth = getAuth();
-
-      /* if (!environment.production) {
-        connectAuthEmulator(auth, 'http://localhost:9099')
-      } */
-
       return auth;
     }),
     provideFirestore(() => {
       const Firestore = getFirestore()
-
-      /* if (!environment.production) {
-        connectFirestoreEmulator(Firestore, 'localhost', 8080)
-      } */
-
       return Firestore
     }),
     provideFunctions(() => {
       const Functions = getFunctions();
       Functions.region = 'europe-west1';
-
-      // if (!environment.production) {
-      //   connectFunctionsEmulator(Functions, 'localhost', 5001)
-      // }
-
       return Functions
     }),
     provideStorage(() => {
       const Storage = getStorage()
-
-      // if (!environment.production) {
-      //   connectStorageEmulator(Storage, 'localhost', 9199)
-      // }
-
       return Storage
     }),
     BrowserAnimationsModule,

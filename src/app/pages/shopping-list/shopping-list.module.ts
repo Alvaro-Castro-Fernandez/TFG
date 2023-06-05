@@ -10,8 +10,9 @@ import { ReactiveFormsModule } from "@angular/forms";
 import { MatIconModule } from "@angular/material/icon";
 import { MatListModule } from "@angular/material/list";
 import { ShoppingListRoutingModule } from "./shopping-list.routing.module";
-import {MatTableModule} from '@angular/material/table';
-import {MatCheckboxModule} from '@angular/material/checkbox';
+import { MatTableModule } from '@angular/material/table';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatSnackBarModule } from "@angular/material/snack-bar";
 
 
 @NgModule({
@@ -28,7 +29,9 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
         MatIconModule,
         MatListModule,
         MatTableModule,
-        MatCheckboxModule
+        MatCheckboxModule,
+        MatSnackBarModule,
+        MatButtonModule,
     ]
 })
 export class ShoppingListModule { }
