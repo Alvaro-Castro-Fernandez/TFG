@@ -1,12 +1,9 @@
-import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { FormControl } from '@angular/forms';
-import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
-import { MatChipInputEvent } from '@angular/material/chips';
 import { Router } from '@angular/router';
-import { Observable, firstValueFrom } from 'rxjs';
-import { map, startWith } from 'rxjs/operators';
-import { DocumentService } from 'src/app/services/document.service';
+import { EMPTY, Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
+
+import { CardItemService } from 'src/app/services/card-item.service';
 
 
 @Component({
@@ -17,55 +14,39 @@ import { DocumentService } from 'src/app/services/document.service';
 export class CardItemComponent {
 
   testArray: any[] = [];
-  products: any;
-  aux = [{}]
+  products$: Observable<any[]> = EMPTY;
+  aux:any
   public arrProducts: any[] = [];
-  separatorKeysCodes: number[] = [ENTER, COMMA];
-  categotyControl = new FormControl('');
-  filteredCategories!: Observable<string[]>;
-  categories: string[] = ['Todo'];
-  allCategories: any[] = [];
+  isAdmin$: Observable<boolean> = EMPTY;
+  isAdmin: boolean = false;
 
   @ViewChild('categoryInput')
   arrInput!: ElementRef<HTMLInputElement>;
   obs!: Observable<any>;
 
   constructor(
-    private ds: DocumentService,
-    private router: Router
+    private router: Router,
+    private cis: CardItemService,
   ) {
-    this.getAllProducts();
-    this.getAllCategories()
+    this.getArrayProducts();
   }
 
-  async getAllProducts() {
-    this.products = await firstValueFrom(this.ds.list('products'))
-    this.aux = this.products
-    for (let index = 0; index < this.aux.length; index++) {
-      this.arrProducts.push(this.aux[index])
-    }
-  }
-
- 
-  remove(data: string): void {
-    const index = this.categories.indexOf(data);
-    if (index >= 0) {
-      this.categories.splice(index, 1);
+  getArrayProducts() {
+    try {
+       this.products$ = this.cis.getAllProducts().pipe(
+      tap(products => {
+        this.aux = products        
+        for (let index = 0; index < this.aux.length; index++) {
+          this.arrProducts.push(this.aux[index])
+        }
+      })
+    )
+    } catch (error) {
+      console.log("Error al listar los productos ==>"+error);
     }
   }
 
   viewProduct(id: string) {
     this.router.navigate([`/main/${id}`]);
-  }
-
-  async getAllCategories() {
-    let aux: any = await firstValueFrom(this.ds.list("/products"));
-    // console.log(aux);
-    for (let x = 0; x < aux.length; x++) {
-      for (let y = 0; y < aux[x].categories.length; y++) {
-        // console.log(aux[x].categories[y]);
-        this.allCategories.push(aux[x].categories[y].value)
-      }
-    }
   }
 }

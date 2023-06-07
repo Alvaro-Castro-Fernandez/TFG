@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Auth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
-import { firstValueFrom } from 'rxjs';
+import { EMPTY, Observable, firstValueFrom, tap } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
 import { DocumentService } from 'src/app/services/document.service';
 
@@ -14,6 +14,8 @@ export class NavbarComponent {
 
   userData: any
   userId: string = ""
+  isAdmin$: Observable<boolean> = EMPTY;
+  isAdmin: boolean = false;
 
   constructor(
     private ds: DocumentService,
@@ -23,6 +25,7 @@ export class NavbarComponent {
   ) {
     this.getUserData()
     this.currentUserIsLogged()
+    this.checkIfIsAdmin()
   }
 
   async logout() {
@@ -46,11 +49,22 @@ export class NavbarComponent {
       return false;
     }
   }
+  checkIfIsAdmin() {
+    this.isAdmin$ = this.AuthS.isAdmin$.pipe(
+      tap(isAdmin => {
+        this.isAdmin = isAdmin;
+      })
+    )
+    return this.AuthS.theUserIsLogged();
+  }
 
   async getUserData() {
-    console.log(this.userId);
-    this.userData = await firstValueFrom(this.ds.get("/accounts/" + this.auth.currentUser!.uid))
-    console.log("asdasd" + this.userData);
+    if (this.auth.currentUser) {
+      console.log(this.userId);
+      this.userData = await firstValueFrom(this.ds.get("/accounts/" + this.auth.currentUser!.uid))
+      console.log("asdasd" + this.userData);
+    }
+
   }
 }
 

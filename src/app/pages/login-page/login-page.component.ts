@@ -32,8 +32,8 @@ export class LoginPageComponent implements OnInit {
     private snackbar:MatSnackBar
   ) {
     this.loginAccount = new FormGroup({
-      email: new FormControl(''),
-      password: new FormControl(''),
+      email: new FormControl('',Validators.required),
+      password: new FormControl('',Validators.required),
     })
   }
 

@@ -18,6 +18,8 @@ import { environment } from 'src/environment/environment';
 import { AuthService } from './services/auth.service';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatDividerModule } from '@angular/material/divider';
+import { AuthGuardGuard } from './guards/auth-guard.guard';
+
 
 
 @NgModule({
@@ -55,7 +57,7 @@ import { MatDividerModule } from '@angular/material/divider';
     MatDividerModule,
 
   ],
-  providers: [AuthService],
+  providers: [AuthService, AuthGuardGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

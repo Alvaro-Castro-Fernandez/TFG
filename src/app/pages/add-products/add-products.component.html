@@ -1,0 +1,90 @@
+<div class="container">
+    <div class="row">
+        <div class="col-8 my-3">
+            <form novalidate [formGroup]="newProduct">
+                <div class="form-params">
+                    <mat-card class="m-2 p-2">
+
+                        <mat-card-title-group>
+                            <mat-card-title style="font-size: 40px; margin: 30px;">Añadir un nuevo
+                                producto</mat-card-title>
+                        </mat-card-title-group>
+
+                        <mat-divider></mat-divider>
+
+                        <mat-card-content style="margin-top: 20px;">
+
+                            <mat-form-field class="full-width">
+                                <mat-label>Nombre del producto</mat-label>
+                                <input matInput formControlName="name">
+                            </mat-form-field>
+
+                            <mat-form-field class="full-width">
+                                <mat-label>Descripcion del producto</mat-label>
+                                <input matInput formControlName="description">
+                            </mat-form-field>
+
+                            <mat-form-field class="full-width">
+                                <mat-label>Stock inicial</mat-label>
+                                <input type="number" matInput formControlName="stock">
+                            </mat-form-field>
+
+                            <mat-form-field class="full-width">
+                                <mat-label>Precio</mat-label>
+                                <input matInput formControlName="price">
+                            </mat-form-field>
+                            <!-- /////////////////////// -->
+                            <!-- Tallas -->
+                            <!-- /////////////////////// -->
+                            <mat-form-field class="full-width">
+                                <mat-label>Tallas disponibles</mat-label>
+                                <mat-chip-grid #chipGridSize>
+                                    <mat-chip-row *ngFor="let size of size" (removed)="removeSize(size)">
+                                        {{size}}
+                                        <button matChipRemove>
+                                            <mat-icon>cancel</mat-icon>
+                                        </button>
+                                    </mat-chip-row>
+                                </mat-chip-grid>
+                                <input #SizeInput formControlName="size" [matChipInputFor]="chipGridSize"
+                                    [matAutocomplete]="auto" [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                                    (matChipInputTokenEnd)="addSize($event)" />
+                                <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selectedSize($event)">
+                                    <mat-option *ngFor="let size of filteredSizes | async" [value]="size">
+                                        {{size}}
+                                    </mat-option>
+                                </mat-autocomplete>
+                            </mat-form-field>
+                            <!-- /////////////////////// -->
+                            <!-- Categorias -->
+                            <!-- /////////////////////// -->
+                            <mat-form-field class="full-width">
+                                <mat-label>Categorias disponibles</mat-label>
+                                <mat-chip-grid #chipGridCategory>
+                                    <mat-chip-row *ngFor="let cat of category" (removed)="removeCategory(cat)">
+                                        {{cat}}
+                                        <button matChipRemove>
+                                            <mat-icon>cancel</mat-icon>
+                                        </button>
+                                    </mat-chip-row>
+                                </mat-chip-grid>
+                                <input #CategoryInput formControlName="categories" [matChipInputFor]="chipGridCategory"
+                                    [matAutocomplete]="auto" [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                                    (matChipInputTokenEnd)="addCategory($event)" />
+                                <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selectedCategory($event)">
+                                    <mat-option *ngFor="let cat of filteredCategories | async" [value]="cat">
+                                        {{cat}}
+                                    </mat-option>
+                                </mat-autocomplete>
+                            </mat-form-field>
+
+                        </mat-card-content>
+                    </mat-card>
+                    <div class="buttons" style="margin-top:10px">
+                        <button mat-raised-button color="primary" (click)="submitNewProduct()">Crear Producto</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row">
-    <div class="col-6 py-5">
+    <div class="col-sm-6 py-5">
       <h2>Carrito de Compra</h2>
 
       <table mat-table [dataSource]="arrDataWithShoppingList" class="mat-elevation-z8" #tabla>
@@ -48,23 +48,8 @@
         <tr mat-row *matRowDef="let row; columns: shoppingListColumns;"></tr>
       </table>
 
-      <mat-card style="margin-top:25px ;">
-        <mat-card-header>
-          <mat-card-title style="text-align: end;">Total de la cesta: {{totalPrice}}€</mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
-          <mat-card-title>Metodos de pago:</mat-card-title>
-          <mat-card-actions style="display: flex; flex-direction: column;">
-            <button mat-raised-button color="primary" disabled style="margin-top:15px">Demo 1</button>
-            <button mat-raised-button color="primary" disabled style="margin-top:15px">Demo 1</button>
-            <button mat-raised-button color="primary" disabled style="margin-top:15px">Demo 1</button>
-            <button mat-raised-button color="primary" disabled style="margin-top:15px">Demo 1</button>
-          </mat-card-actions>
-        </mat-card-content>
-      </mat-card>
-
     </div>
-    <div class="col-6 py-5">
+    <div class="col-sm-6 py-5">
       <h2>Lista de Favoritos</h2>
 
       <table mat-table [dataSource]="arrDataWithFavList" class="mat-elevation-z8" #tabla>
@@ -99,5 +84,21 @@
         <tr mat-header-row *matHeaderRowDef="favListColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: favListColumns;"></tr>
       </table>
+      
+      <mat-card style="margin-top:25px ;">
+        <mat-card-header>
+          <mat-card-title style="text-align: end;">Total de la cesta: {{totalPrice}}€</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <mat-card-title>Metodos de pago:</mat-card-title>
+          <mat-card-actions style="display: flex; flex-direction: column;">
+            <button mat-raised-button color="primary" disabled style="margin-top:15px">Demo 1</button>
+            <button mat-raised-button color="primary" disabled style="margin-top:15px">Demo 1</button>
+            <button mat-raised-button color="primary" disabled style="margin-top:15px">Demo 1</button>
+            <button mat-raised-button color="primary" disabled style="margin-top:15px">Demo 1</button>
+          </mat-card-actions>
+        </mat-card-content>
+      </mat-card>
+
     </div>
   </div>

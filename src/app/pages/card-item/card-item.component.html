@@ -1,14 +1,15 @@
-<div class="container">
+<div class="container" *ngIf="products$ | async">
   <div class="row m-4">
     <div class="col-12 my-5">
       <div class="products">
+
         <mat-card *ngFor="let card of arrProducts" class="cardContainer" (click)="viewProduct(card.id)">
           <mat-card-header>
             <mat-card-title-group class="cardTitleGroup">
               <mat-card-title>{{card.name}}</mat-card-title>
               <div *ngIf="card.discount;">
-                <mat-card-subtitle> <span class="lineThrought">{{card.price}}€</span>{{card.price - (card.price
-                  *(card.discount/100))}}€</mat-card-subtitle>
+                <mat-card-subtitle> <span class="lineThrought">{{card.price}}€</span>{{(card.price - (card.price
+                  *(card.discount/100))).toFixed(2)}}€</mat-card-subtitle>
               </div>
               <div *ngIf="!card.discount;">
                 <mat-card-subtitle>{{card.price}}€</mat-card-subtitle>
@@ -24,6 +25,7 @@
             </mat-card-actions>
           </mat-card-content>
         </mat-card>
+        
       </div>
     </div>
   </div>

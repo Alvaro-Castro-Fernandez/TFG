@@ -1,6 +1,6 @@
 import { Component} from "@angular/core";
 import { Auth } from "@angular/fire/auth";
-import { FormControl, FormGroup } from "@angular/forms";
+import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { ActivatedRoute, Router } from "@angular/router";
 import { firstValueFrom } from "rxjs";
@@ -29,8 +29,8 @@ export class ProductDisplayComponent {
   ) {
     this.getProduct();
     this.productForm = new FormGroup({
-      size: new FormControl(''),
-      ammount: new FormControl('')
+      size: new FormControl('',Validators.required),
+      ammount: new FormControl('',Validators.required)
     })
   }
 

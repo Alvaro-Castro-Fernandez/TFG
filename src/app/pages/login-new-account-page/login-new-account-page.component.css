@@ -27,3 +27,9 @@ form {
   .buttons{
     padding-bottom: 2em;
   }
+  @media (max-width:367px) {
+    .card {
+      max-width: 367px;
+      overflow-y: scroll;
+    }
+  }

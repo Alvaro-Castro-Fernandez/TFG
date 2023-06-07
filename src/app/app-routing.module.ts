@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthGuardGuard } from './guards/auth-guard.guard';
 
 const routes: Routes = [
   {
@@ -23,15 +24,25 @@ const routes: Routes = [
     loadChildren: () => import('./pages/login-new-account-page/login-new-account-page.module').then(m => m.LoginNewAccountPageModule)
   },
   {
-    path: 'onSale',
-    loadChildren: () => import('./pages/on-sales-page/on-sales-page.module').then(m => m.OnSalesPageModule)
-  },
-  {
     path: 'shoppingList',
+    canActivate: [AuthGuardGuard],
     loadChildren: () => import('./pages/shopping-list/shopping-list.module').then(m => m.ShoppingListModule)
   },
-
-
+  {
+    path: 'adminViewPage',
+    canActivate: [AuthGuardGuard],
+    loadChildren: () => import('./pages/view-products/view-products.module').then(m => m.ViewProductsModule)
+  },
+  {
+    path: 'adminAddProducts',
+    canActivate: [AuthGuardGuard],
+    loadChildren: () => import('./pages/add-products/add-products.module').then(m => m.AddProductsModule)
+  },
+  {
+    path: 'view-products',
+    canActivate: [AuthGuardGuard],
+    loadChildren: () => import('./pages/view-products/view-products.module').then(m => m.ViewProductsModule)
+  }
 ];
 
 

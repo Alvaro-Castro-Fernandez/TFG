@@ -9,7 +9,7 @@ import {
   authState,
   updateProfile
 } from '@angular/fire/auth';
-import { firstValueFrom } from 'rxjs';
+import { BehaviorSubject, firstValueFrom } from 'rxjs';
 
 
 @Injectable({
@@ -17,27 +17,38 @@ import { firstValueFrom } from 'rxjs';
 })
 export class AuthService {
 
+  private isAdmin = new BehaviorSubject<boolean>(false);
+  isAdmin$ = this.isAdmin.asObservable();
   user = authState(this.auth);
   user$ = this.user;
 
-  constructor(private auth: Auth) { }
-  
+  constructor(private auth: Auth) { 
+    this.checkIfIsAdmin()
+  }
+
+  async checkIfIsAdmin() {
+    const user = await firstValueFrom(this.user)
+    if (user && user.uid === '2oL1ZjCBZrQJj04lAUC5mN0OTW82') {
+      this.isAdmin.next(true);
+    }
+  }
+
 
   async createNewUser({ email, password, displayName }: any) {
     const registrer = await createUserWithEmailAndPassword(this.auth, email, password);
     const user = await firstValueFrom(this.user$);
     if (user) {
-      await updateProfile(user, {displayName: displayName})
+      await updateProfile(user, { displayName: displayName })
     }
     return registrer
   }
 
-  /* loginAnExistingAccount({ email, password }: any) {
-    return signInWithEmailAndPassword(this.auth, email, password)
-  } */
-
-  loginAnExistingAccount(email: string, password: string) {
-    return signInWithEmailAndPassword(this.auth, email, password)
+  async loginAnExistingAccount(email: string, password: string) {
+    const userData = await signInWithEmailAndPassword(this.auth, email, password)
+    if (userData.user.uid === '2oL1ZjCBZrQJj04lAUC5mN0OTW82') {
+      this.isAdmin.next(true);
+    }
+    return userData ;
   }
 
   logoutCurrentAccount() {
